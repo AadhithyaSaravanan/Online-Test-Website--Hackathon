@@ -1,0 +1,541 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-B0TPE3D4lFy9zFzktcZYz5zcvmGK93jlUpKpNB0uF6z3p0b2MS5fCkZmZJCkm8H" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O5oVMWSktQOp6b7In1Zl3/JiXnE2I1nkwCk5do8xZ6JwGJ8f" crossorigin="anonymous">
+<!-- Add Splide.js CSS -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #b3b3ff, #d9b3ff); /* Soft lavender to subtle lavender gradient */
+    }
+
+    /* ... (your existing styles) ... */
+    .subcontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        padding:10px 20px;
+        margin-left:337px;
+        margin-top:-50px;
+    }
+
+    .logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 20px; /* Optional: Add margin bottom to the logo */
+    }
+
+
+    .h1 {
+        text-align: center;
+    }
+
+    .p {
+        text-align: center;
+    }
+
+
+
+    .buttoncontainer {
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        padding: 10px 20px;
+        margin-left: 20px;
+        margin-top: 100px;
+        
+    }
+
+    .custom-button {
+        background-color: grey;
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-right: 10px 0; /* Adjust the vertical spacing between buttons */
+    }
+
+        .custom-button:hover {
+            background-color: #1976d2;
+        }
+
+
+
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+    .button-container {
+        margin-top: 20px;
+    }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* ... (your existing styles) ... */
+
+    .technology-logos {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        font-size: 3rem;
+        margin-bottom:-100px;
+        /* Adjust the icon size as needed */
+    }
+
+    .logo1-item {
+        width: 80px; /* Set the width and height for the square logo container */
+        height: 80px;
+        border: 2px solid #2196f3; /* Border color */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px; /* Adjust the spacing between logos */
+        /* Adjust the icon size */
+       
+    }
+    .bi {
+        vertical-align: middle;
+    }
+
+
+    button i {
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+
+    /* Add styles for the button container */
+    .btntest-container {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        justify-content: space-between;
+        margin-top:160px;
+       
+    }
+
+
+
+    /* Button Styles */
+
+    .btnhome {
+        background: #4384e6;
+        color: black;
+        border: none;
+        border-radius: 20px;
+        padding: 1rem 2rem;
+        font-size: 1.25em;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+    }
+
+        .btnhome i {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        /* Primary Button Hover Effect */
+        .btnhome:hover {
+            background: #0066ff;
+            color:#fff;
+            transform: scale(1.05); /* Add a slight scale effect on hover */
+        }
+
+    /* Success Button Styles */
+    .btnhome-success {
+        background: transparent;
+        color: #0d6efd;
+        border: 1px solid #0d6efd;
+        margin-left: 10px; /* Add space between buttons */
+    }
+
+        /* Success Button Hover Effect */
+        .btnhome-success:hover {
+            background: #0d6efd;
+            color: #fff;
+        }
+
+
+    .reviews-heading {
+        text-align: center;
+        color: white; /* Green color */
+        font-size: 36px;
+        font-weight: bold;
+        font-family: 'Roboto', sans-serif; /* Use a different font, 'Roboto' in this example */
+        width: 100%;
+        margin-bottom: 20px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+  
+
+</style>
+
+    
+      <link rel="stylesheet" type="text/css" href="/css/Home1.css" >
+    
+
+
+
+
+    <div class="container1">
+        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVkdWNhdGlvbiUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D/300" alt="Top Left" class="corner-image top-left">
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGVkdWNhdGlvbiUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D/400" alt="Top Right" class="corner-image top-right">
+        <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/500" alt="Bottom Left" class="corner-image bottom-left">
+       <img src="https://plus.unsplash.com/premium_photo-1664300299678-25f3342ae114?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njl8fGVkdWNhdGlvbiUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D/600" alt="Bottom Right" class="corner-image bottom-right">
+
+    
+       
+
+    <div class="subcontainer">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9pU7L0ZigR3PIuHdptT1wpCgMZKTXEJfotg&usqp=CAU" alt="Logo" class="logo">
+
+        <h1>Welcome to Hackathon.com</h1>
+        <p>Prepare. Practice. Succeed.</p>
+
+       
+    
+    
+        <div class="technology-logos">
+            <div class="logo1-item"><i class="fab fa-python"></i></div>
+            <div class="logo1-item"><i class="fas fa-database"></i></div>
+            <div class="logo1-item"><i class="fas fa-cogs"></i></div>
+            <div class="logo1-item"><i class="fab fa-java"></i></div>
+            <div class="logo1-item"><i class="fas fa-bolt"></i></div>
+        </div>
+        <div class="btntest-container">
+            <form method="post" action="/Home/CheckAuthentication">
+                <button class="btnhome" type="submit" name="destination" value="TakeTest">
+                    <i class="fas fa-edit"></i> Take Test
+                </button>
+            </form>
+            <form method="post" action="/Home/CheckAuthentication1">
+                <button class="btnhome" type="submit" name="destination" value="Report">
+                    <i class="fas fa-chart-bar"></i> Report
+                </button>
+            </form>
+        </div>
+        
+    </div>
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>@ViewData["Message"]</p>
+            <div class="button-container">
+                <button id="confirmButton">Confirm</button>
+                <button id="cancelButton">Cancel</button>
+            </div>
+        </div>
+    </div>
+   </div>
+   
+   <!--contaniner2 creation-->
+<div class="contentfix">
+    <div class="container2">
+        <div class="carousel">
+            <div class="carousel__face"><span style="font-size: 18px;">Unlock Your Potential</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Excel in Exams</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Study Smart</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Success Starts Here</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Prepare, Practice, Succeed</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Knowledge Is Power</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Ace Your Exams</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Future Leaders Start Here</span></div>
+            <div class="carousel__face"><span style="font-size: 18px;">Learn, Attend, Achieve</span></div>
+        </div>
+    </div>
+</div>
+
+<!--Feature section-->
+<div class="feature-section">
+    <div class="feature-box">
+        <img src="https://img.icons8.com/ios-filled/50/000000/open-book.png" alt="Book Icon">
+        <h2>Wide Range of Exams</h2>
+        <p>Explore and practice for a variety of exams from different subjects.</p>
+        
+    </div>
+    <div class="feature-box">
+        <img src="https://img.icons8.com/ios-filled/50/000000/ruler.png" alt="Skills Icon">
+
+        <h2>Test your Skill</h2>
+        <p>Engage with us and improve your technical skill set and quizzes designed for effective learning.</p>
+         </div>
+    <div class="feature-box">
+        <i class="fas fa-chart-line fa-3x"></i>
+        <h2>Real-time Analytics</h2>
+        <p>Track your progress with detailed analytics and performance reports.</p>
+        
+    </div>
+
+    <div class="feature-box">
+        <img src="https://img.icons8.com/ios-filled/50/000000/conference-background-selected.png" alt="Users Icon">
+
+        <h2>No. of People Tested</h2>
+        <p>Join millions of users who have tested their knowledge with us.</p>
+         </div>
+    <div class="feature-box">
+        <img src="https://img.icons8.com/ios-filled/50/000000/handshake.png" alt="Partners Icon">
+
+        <h2>Our Trusted Partners</h2>
+        <p>We are proud to be associated with numerous leading companies for your success.</p>
+       </div>
+    <div class="feature-box">
+        <img src="https://img.icons8.com/ios-filled/50/000000/trophy.png" alt="Success Icon">
+        <h2>Your Path to Success</h2>
+        <p>Start your journey today and unlock a world of opportunities with our online exam platform.</p>
+        
+    </div>
+</div>
+
+
+
+<div class="tie-up-container">
+    <h2>Our Tie-Up with Top MNC</h2>
+    <div class="company-list">
+        <div class="company-item">
+            <img src="https://www.softura.com/wp-content/uploads/2023/02/Softura-Black.svg" alt="Company 1 Logo">
+          
+        </div>
+        <div class="company-item">
+            <img src="https://www.tcs.com/content/dam/global-tcs/en/images/home/dark-theme.svg" alt="Company 2 Logo">
+            
+        </div>
+        <div class="company-item">
+            <img src="https://www.wipro.com/content/dam/nexus/staticsites/homepage/header/Wipro_Primary%20Logo_Color_RGB.svg" alt="Company 3 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.ctscorp.com/wp-content/themes/orbit-media/images/cts-logo.png" alt="Company 4 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.zohowebstatic.com/sites/zweb/images/commonroot/zoho-logo-darkbg.svg" alt="Company 5 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://files.techmahindra.com/static/img/techm-logo.png" alt="Company 6 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.axisbank.com/assets/images/logo-white.png" alt="Company 7 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.hcltech.com/themes/custom/hcltech/images/hcltech-new-logo.svg" alt="Company 8 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.natwestgroup.com/content/dam/championlogos/Logo_Wh_NatWestGroupColleague-Hor.svg" alt="Company 9 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://seeklogo.com/images/T/tvs-motor-company-logo-64528DF51C-seeklogo.com.png" alt="Company 10 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.ril.com/App_Themes/RIL/images/generic/RIL_Logo.png" alt="Company 11 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://prod.ucwe.capgemini.com/in-en/wp-content/themes/capgemini2020/assets/images/logo.svg" alt="Company 12 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://assets.kpmg.com/is/image/kpmg/kpmg-logo-1" alt="Company 13 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://www.accenture.com/content/dam/accenture/final/images/icons/symbol/Acc_Logo_Black_Purple_RGB.png" alt="Company 14 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://dldmuionqjz51.cloudfront.net/wp-content/themes/Hexaware/assets/img/logo.svg" alt="Company 15 Logo">
+
+        </div>
+        <div class="company-item">
+            <img src="https://pwebassets.paytm.com/commonwebassets/paytmweb/header/images/logo.svg" alt="Company 16 Logo">
+
+        </div>
+        <!-- Add more company items as needed -->
+    </div>
+</div>
+
+
+
+<div class="reviews-section">
+
+    <h2 class="reviews-heading">See what users say about us </h2>
+  
+        <div class="review-card">
+        <img src="https://lh3.googleusercontent.com/bC_Ds3aUSflp1obh0uZcRvjdycXSFUwKarpfm2zeXRli4JLY_BnjjlP4NzogviY2KwA" alt="Student 2">
+        <h3>Lionel Messi</h3>
+        <p>Excellent platform! The variety of exams offered helped me prepare thoroughly. Interactive study materials made learning engaging. The real-time analytics highlighted my progress, boosting my confidence. Supportive customer service ensured a smooth experience. Highly recommended!</p>
+    </div>
+    <div class="review-card">
+        <img src="https://i.pinimg.com/736x/fa/75/d3/fa75d35a0d10fac453109380a62b9b35.jpg" alt="Student 2">
+        <h3>Cristiano Ronaldo</h3>
+        <p>Outstanding learning experience! The vast question bank covered every topic comprehensively. Personalized exams challenged me, enhancing my skills. The platform's stability and user-friendly interface made studying a pleasure. Thank you for helping me excel!</p>
+    </div>
+    <div class="review-card">
+        <img src="https://render.fineartamerica.com/images/rendered/default/flat/round-beach-towel/images/artworkimages/medium/3/kevin-de-bruyne-adnan-cute.jpg?&targetx=-2&targety=-194&imagewidth=788&imageheight=1398&modelwidth=788&modelheight=788&backgroundcolor=CFCDCF&orientation=0" alt="Student 2">
+
+        <h3>Kevin De Bruyne</h3>
+        <p>Exceptional online exam platform! As a student, I found this website to be a game-changer in my exam preparation journey. The user-friendly interface made navigating through different exams seamless. The vast array of exams available allowed me to practice extensively.</p>
+    </div>
+</div>
+
+
+
+
+ <script>
+
+   
+    // JavaScript to handle modal behavior
+    document.addEventListener("DOMContentLoaded", function () {
+        var modal = document.getElementById('confirmationModal');
+        var confirmButton = document.getElementById('confirmButton');
+        var cancelButton = document.getElementById('cancelButton');
+
+        // Check if ViewData["Message"] is not empty
+        if ('@ViewData["Message"]' !== '') {
+            showModal();
+        }
+
+        // Function to show the modal
+        function showModal() {
+            modal.style.display = 'block';
+        }
+
+        // Function to hide the modal
+        function hideModal() {
+            modal.style.display = 'none';
+        }
+
+        // Event listener for confirm button click
+        confirmButton.addEventListener('click', function () {
+            // Redirect to the User Controller's Login Action
+            window.location.href = "/User/Login";
+        });
+
+        // Event listener for cancel button click
+        cancelButton.addEventListener('click', function () {
+            // Handle cancel button click (if needed)
+            // For example, close the modal
+            hideModal();
+        });
+    });
+
+
+    // JavaScript to handle automatic carousel sliding
+
+    // JavaScript for automatic slideshow
+    // Get all elements with class name "feature-section"
+    // Get all elements with class name "feature-section"
+    // Get all elements with class name "feature-section"
+    // Get all elements with class name "feature-section"
+    var featureSections = document.querySelectorAll('.feature-section');
+    //Gets all elements with the class name "feature-section" and stores them in the featureSections variable.
+    // Function to display feature boxes as a slideshow
+    function showSlides() {
+        featureSections.forEach(function (featureSection) {
+            var featureBoxes = featureSection.getElementsByClassName("feature-box");
+            //Gets all elements with the class name "feature-box" within the current feature section.
+
+            var currentSlideIndex = 0;
+            var totalSlides = featureBoxes.length;
+            var slidesToShow = 3;
+
+            setInterval(function () {
+                // Hide all feature boxes
+                for (var i = 0; i < totalSlides; i++) {
+                    featureBoxes[i].style.display = "none";
+                }
+
+                // Show the next set of feature boxes
+                for (var i = 0; i < slidesToShow; i++) {
+                    featureBoxes[currentSlideIndex].style.display = "block";
+                    //Shows the next set of feature boxes by setting their display style property to "block".
+                    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;//loop through boxes
+                }
+            }, 3000); // Change slide every 3 seconds
+        });
+    }
+
+    // Call the function to start the slideshow
+    showSlides();
+
+
+
+
+ </script>
+
+
+
+
+
+
+
+

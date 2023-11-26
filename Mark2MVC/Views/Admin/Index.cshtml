@@ -1,0 +1,179 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- Include Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    body {
+        background-color: #f9ebc7; /* Creamy background */
+        color: #4a4a4a; /* Dark gray text color */
+        font-family: 'Cursive', sans-serif;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('https://images.pexels.com/photos/1556704/pexels-photo-1556704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover; /* Cover the entire screen with the background image */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Repeat the background image */
+        background-attachment: fixed; /* Fix the background image so it doesn't scroll with the page */
+    }
+
+    .container {
+        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white container */
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        padding: 40px;
+        text-align: center;
+        margin-top:5px;
+    }
+
+    h1 {
+        color: #8a63a2; /* Purple heading color */
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        border: 2px solid #ccc; /* Card border */
+        background-color: transparent;
+        transition: transform 0.2s;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-icon {
+        font-size: 24px; /* Decreased icon size */
+        color: #4a90e2; /* Dodger blue icon color */
+    }
+
+    .card-title {
+        font-size: 24px;
+        color: #4a90e2; /* Dodger blue title color */
+        margin-top: 10px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #4a90e2; /* Dodger blue button color */
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #ff6f61; /* Light red button color */
+        color: #fff;
+    }
+
+    .btn-success {
+        background-color: #00cc66; /* Vivid green button color */
+        color: #fff;
+    }
+
+    .btn:hover {
+        transform: scale(1.1); /* Scale up button on hover */
+    }
+
+    .btn:focus {
+        outline: none;
+    }
+
+    /* Custom icon colors */
+    .card1 .card-icon {
+        color: #ff6f61; /* Light red icon color */
+    }
+
+    .card2 .card-icon {
+        color: #00cc66; /* Vivid green icon color */
+    }
+
+    .card3 .card-icon {
+        color: #8a63a2; /* Purple icon color */
+    }
+
+    .card4 .card-icon {
+        color: #f39c12; /* Orange icon color */
+    }
+
+    .card5 .card-icon {
+        color: #e74c3c; /* Red icon color */
+    }
+
+    .card-image {
+        width: 240px; /* Increased image size */
+        height: 240px; /* Increased image size */
+        margin-top: 20px; /* Spacing between icon and image */
+    }
+</style>
+
+<div class="text-center">
+    <h1>Welcome, Admin!</h1>
+    <p>Choose an action:</p>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 card1">
+            <div class="card">
+                <img src="~/Fetch.jpg" alt="Image 1" class="card-image">
+
+                <a href="@Url.Action("Fetch", "Admin")" class="btn btn-primary">
+                    <i class="card-icon fas fa-plus-circle"></i> Fetch Records
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 card2">
+            <div class="card">
+                <img src="~/Questions.jpg" alt="Image 2" class="card-image">
+
+                <a href="@Url.Action("AddQuestions", "Admin")" class="btn btn-primary">
+                    <i class="card-icon fas fa-plus-circle"></i> Add Questions
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 card3">
+            <div class="card">
+                <img src="~/Delete.jpg" alt="Image 3" class="card-image">
+                <a href="@Url.Action("RemoveQuestions", "Admin")" class="btn btn-danger">
+                    <i class="card-icon fas fa-trash-alt"></i> Remove Questions
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 card4">
+            <div class="card">
+                <img src="~/Report.jpg" alt="Image 4" class="card-image">
+                <a href="@Url.Action("Index", "Test")" class="btn btn-success">
+                    <i class="card-icon fas fa-chart-bar"></i> View Reports
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 card5">
+            <div class="card">
+                <img src="~/Course.jpg" alt="Image 5" class="card-image">
+                <a href="@Url.Action("CourseIndex", "Course")" class="btn btn-success">
+                    <i class="card-icon fas fa-book"></i> Courses
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+

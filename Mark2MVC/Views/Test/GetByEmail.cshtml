@@ -1,0 +1,263 @@
+﻿@model List<TestResultReport>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Report with Interactive Particle Background</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #232323;
+            color:#ffff;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 50px;
+            color: white; /* Dark heading color */
+        }
+
+        .table-responsive {
+            margin: 50px auto;
+        }
+
+        .table {
+            background-color: #EAF2E3; /* Light green background for table */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th, .table td {
+                text-align: center;
+                padding: 15px;
+            }
+
+            .table thead {
+                background-color: darkkhaki; /* Gold background for table header */
+                color: black; /* White text color for table header */
+            }
+
+        .alert {
+            margin-top: 50px;
+            text-align: center;
+            background-color: #F76D57; /* Light coral background for error messages */
+            color: #ffffff; /* White text color for error messages */
+            border: none;
+            border-radius: 10px;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+        .h2{
+            color:#ffff;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Exam Report</h2>
+    <div id="particles-js"></div>
+
+    
+
+    @if (Model != null && Model.Any())
+    {
+        <!-- Display user details if the list is not empty -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Reg_Id</th>
+                        <th>FullName</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>CourseName</th>
+                        <th>TotalMarks</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Reg_Id</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Email</td>
+                            <td>@user.Mobile</td>
+                            <td>@user.State</td>
+                            <td>@user.City</td>
+                            <td>@user.CourseName</td>
+                            <td>@user.TotalMarks</td>
+                            <td>@user.Level</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+    {
+        <!-- Display error message if the list is empty -->
+        <div class="alert" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#ffffff"
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 5,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#ffffff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "grab"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    bubble: {
+                        distance: 400,
+                        size: 40,
+                        duration: 2,
+                        opacity: 8,
+                        speed: 3
+                    },
+                    repulse: {
+                        distance: 200,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    },
+                    remove: {
+                        particles_nb: 2
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Check for ErrorMessage in TempData
+        var errorMessage = "@TempData["ErrorMessage"]";
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed',
+                text: errorMessage,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Exit'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/Exam/Index';
+                }
+            });
+        }
+
+        // Check for WarningMessage in TempData
+        var warningMessage = "@TempData["WarningMessage"]";
+        if (warningMessage) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: warningMessage,
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Exit'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/Exam/Index';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,372 @@
+﻿@model Mark2MVC.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+<style>
+    body {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1010%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M304.5911086793009 86.24315709772573L201.7933855617728-32.01209591093139 83.53813255311567 70.78562720659669 186.33585567064375 189.04088021525382z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M606.102%2c192.034C628.449%2c191.878%2c653.841%2c190.474%2c665.065%2c171.149C676.319%2c151.772%2c666.356%2c128.154%2c654.1%2c109.395C643.193%2c92.7%2c626.037%2c81.424%2c606.102%2c80.899C585.176%2c80.348%2c565.09%2c89.303%2c553.52%2c106.748C540.546%2c126.31%2c533.374%2c152.002%2c545.693%2c171.983C557.627%2c191.34%2c583.363%2c192.193%2c606.102%2c192.034' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M789.98 157.97 a155.15 155.15 0 1 0 310.3 0 a155.15 155.15 0 1 0 -310.3 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M605.85 452.13 a176.83 176.83 0 1 0 353.66 0 a176.83 176.83 0 1 0 -353.66 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M1037.291%2c725.325C1087.818%2c725.125%2c1144.242%2c725.971%2c1172.591%2c684.146C1203.628%2c638.356%2c1198.677%2c576.717%2c1170.139%2c529.33C1142.475%2c483.395%2c1090.724%2c454.981%2c1037.291%2c459.483C989.804%2c463.484%2c963.026%2c508.139%2c938.279%2c548.865C912.009%2c592.098%2c875.363%2c641.108%2c900.118%2c685.226C925.102%2c729.753%2c986.233%2c725.528%2c1037.291%2c725.325' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1007.54%2c319.633C1033.271%2c318.026%2c1049.568%2c294.929%2c1062.091%2c272.394C1074.134%2c250.722%2c1084.256%2c225.234%2c1071.963%2c203.703C1059.599%2c182.048%2c1032.457%2c175.875%2c1007.54%2c176.846C984.504%2c177.743%2c963.916%2c189.138%2c951.259%2c208.405C937.028%2c230.069%2c928.048%2c256.908%2c939.75%2c280.036C952.413%2c305.063%2c979.547%2c321.382%2c1007.54%2c319.633' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M219.61 99.64 a136.46 136.46 0 1 0 272.92 0 a136.46 136.46 0 1 0 -272.92 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M795.22 46.7 a154.38 154.38 0 1 0 308.76 0 a154.38 154.38 0 1 0 -308.76 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M40.91 398.78 a134.16 134.16 0 1 0 268.32 0 a134.16 134.16 0 1 0 -268.32 0z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1010'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    /* Custom CSS for the registration form */
+    .registration-form {
+        background-color: rgba(255, 255, 255, 0.6); /* Added transparency */
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        box-shadow: 0 0 40px 20px black; /* glowing effect in white */
+        color: white;
+        transition: all 0.3s ease; /* Add transition for smooth effect */
+    }
+
+        .registration-form:hover {
+            background-color: rgba(23, 23, 23, 0.5); /* Darken the background color on hover */
+            box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.5);
+            transform: scale(0.95);
+        }
+
+    .form-control-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border: 1px solid #ccc;
+        margin: 5px 0;
+    }
+
+        .form-control:focus {
+            border-color: lightblue;
+            box-shadow: 0 0 5px lightblue;
+        }
+
+    .register-button {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+    }
+
+        .register-button:hover {
+            background-color: #0056b3;
+        }
+
+    /* Styling for captcha input */
+    .form-group.col-md-6.dnt-captcha input[type="text"] {
+        background-color: transparent;
+        border: 1px solid #ccc;
+        margin: 5px 0;
+    }
+
+        .form-group.col-md-6.dnt-captcha input[type="text"]:focus {
+            border-color: lightblue;
+            box-shadow: 0 0 5px lightblue;
+        }
+
+    .form-control.select-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+        /* Style for the actual select element */
+        .form-control.select-wrapper select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: transparent;
+            background-image: linear-gradient(45deg, transparent 50%, #ccc 50%), linear-gradient(135deg, #ccc 50%, transparent 50%);
+            background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px);
+            background-size: 5px 5px, 5px 5px;
+            background-repeat: no-repeat;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+            /* Style for the select dropdown when focused */
+            .form-control.select-wrapper select:focus {
+                outline: none;
+                border-color: lightblue;
+                box-shadow: 0 0 5px lightblue;
+            }
+
+
+    .select-with-arrow {
+        position: relative;
+    }
+
+        .select-with-arrow::after {
+            content: "\25BE"; /* Downward arrow character */
+            font-size: 14px; /* Adjust size as needed */
+            position: absolute;
+            top: calc(50% - 6px); /* Adjust vertical positioning */
+            right: 10px; /* Adjust horizontal positioning */
+            pointer-events: none;
+            color: #555; /* Adjust color */
+        }
+
+</style>
+
+
+<div class="container registration-form">
+    @if (TempData.ContainsKey("SuccessMessage"))
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        <script>
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Login", "User")';
+            }, 5000);
+        </script>
+    }
+    else if (TempData.ContainsKey("ErrorMessage"))
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        <script>
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Login", "User")';
+            }, 5000);
+        </script>
+    }
+    else
+    {
+        <form asp-action="Register" class="row">
+            <center><h1>Registration Form</h1></center>
+            <div class="col-md-6">
+                <!-- User Details -->
+                <div class="form-group">
+                    <label asp-for="FullName" class="form-control-label"></label>
+                    <input asp-for="FullName" class="form-control" placeholder="Enter your full name" />
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="form-control-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter your email address" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Password" class="form-control-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="form-control-label"></label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mobile" class="form-control-label"></label>
+                    <input asp-for="Mobile" class="form-control" placeholder="Enter your mobile number" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Additional Information -->
+                <div class="form-group">
+                    <label for="State" class="form-control-label">State</label>
+                    <div class="select-with-arrow">
+                        <select id="State" asp-for="State" class="form-control">
+                            <option value="" disabled selected>Select State</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Jammu And Kashmir">Jammu And Kashmir</option>
+                            <option value="Delhi">Delhi</option> <!-- Delhi (Union Territory) -->
+                            <option value="Puducherry">Puducherry</option> <!-- Puducherry (Union Territory) -->
+                            <option value="Chandigarh">Chandigarh</option> <!-- Chandigarh (Union Territory) -->
+                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option> <!-- Dadra and Nagar Haveli and Daman and Diu (Union Territory) -->
+                            <option value="Lakshadweep">Lakshadweep</option> <!-- Lakshadweep (Union Territory) -->
+                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option> <!-- Andaman and Nicobar Islands (Union Territory) -->
+                            <option value="Ladakh">Ladakh</option> <!-- Ladakh (Union Territory) -->
+
+                        </select>
+                    </div>
+
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="City" class="form-control-label">City</label>
+                    <div class="select-with-arrow">
+                        <select id="City" asp-for="City" class="form-control">
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DateOfBirth" class="form-control-label"></label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" placeholder="Select your date of birth" min="1950-01-01" max="2005-12-31"  type="date" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Qualification" class="form-control-label"></label>
+                    <input asp-for="Qualification" class="form-control" placeholder="Enter your qualification" />
+                    <span asp-validation-for="Qualification" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="YearOfCompletion" class="form-control-label"></label>
+                    <input asp-for="YearOfCompletion" class="form-control" placeholder="Enter your year of completion" />
+                    <span asp-validation-for="YearOfCompletion" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Captcha -->
+            <div class="form-group col-md-6">
+                <dnt-captcha asp-captcha-generator-ma="999999"
+                             asp-captcha-generator-min="111111"
+                             asp-captcha-generator-language="English"
+                             asp-captcha-generator-display-mode="ShowDigits"
+                             asp-use-relative-urls="true"
+                             asp-placeholder="Enter Captcha"
+                             asp-font-name="Tahoma"
+                             asp-font-size="20"
+                             asp-fore-color="#333333"
+                             asp-back-color="#ccc"
+                             asp-text-box-class="text-box form-control"
+                             asp-text-box-template="<span class='input-group-prepend' ><span class='form-group-text'></span></span>{0}"
+                             asp-validation-error-message="Please enter the security code"
+                             asp-validation-message-class="text-danger"
+                             asp-refresh-button-class="fas fa-redo btn-sm"
+                             asp-use-noise="false">
+                </dnt-captcha>
+            </div>
+
+            <div class="form-group col-md-12">
+                <br><center> <button type="submit" class="btn btn-primary register-button"> <i class="bi bi-envelope"></i> Register</button> </center>
+            </div>
+
+            <div>
+                <br /><center> <a asp-action="Login">Already have a Account</a> </center>
+            </div>
+        </form>
+    }
+</div>
+
+<script>
+    // Function to populate cities based on the selected state
+    function populateCities() {
+        var stateSelect = document.getElementById("State");
+        var cityInput = document.getElementById("City");
+
+        // Clear the current options in the city dropdown
+        cityInput.value = ''; // Clear the selected value
+
+        var selectedState = stateSelect.value;
+
+        // Define city options for each state
+        var cities = {
+            "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
+            "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Tirupati", "Amaravathi"],
+            "Karnataka": ["Bangalore", "Mysore", "Mangalore"],
+            "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
+            "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra"],
+            "Gujarat": ["Ahmedabad", "Surat", "Vadodara"],
+            "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur"],
+            "Haryana": ["Chandigarh", "Faridabad", "Gurgaon"],
+            "Kerala": ["Thiruvananthapuram", "Kollam", "Alappuzha"],
+            "Telangana": ["Hyderabad", "Warangal", "Khammam"],
+            "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela"],
+            "Punjab": ["Ludhiana", "Amritsar", "Jalandhar"],
+            "Madhya Pradesh": ["Indore", "Bhopal", "Gwalior"],
+            "Jharkhand": ["Dhanbad", "Jamshedpur", "Ranchi"],
+            "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur"],
+            "Uttarakhand": ["Dehradun", "Nainital", "Almora"],
+            "Goa": ["Panaji", "Vasco da Gama", "Canacona"],
+            "Assam": ["Dispur", "Guwahati", "Silchar"],
+            "Bihar": ["Patna", "Gaya", "Bhagalpur"],
+            "Himachal Pradesh": ["Shimla", "Solan", "Kullu"],
+            "Manipur": ["Imphal", "Thoubal", "Churachandpur"],
+            "Meghalaya": ["Shillong", "Aizawl", "Kohima"],
+            "Nagaland": ["Kohima", "Mokokchung", "Wokha"],
+            "Tripura": ["Agartala", "Dibrugarh", "Udaipur"],
+            "Arunachal Pradesh": ["Itanagar", "Pasighat", "Tawang"],
+            "Sikkim": ["Gangtok", "Lachung", "Mangan"],
+            "Mizoram": ["Aizawl", "Champhai", "Lunglei"],
+            "West Bengal": ["Kolkata", "Durgapur", "Siliguri"],
+            "Jammu And Kashmir": ["Jammu", "Srinagar", "Anantnag"],
+            "Delhi": ["Delhi", "Noida"],
+            "Ladakh": ["Kargil", "Leh", "Kullu"],
+            "Chandigarh": ["Chandigarh", "Faridabad"],
+            "Puducherry": ["Pondicherry", "Karaikal"],
+            "Lakshadweep": ["Lakshadweep", "Kavaratti"],
+            "Andaman and Nicobar Islands": ["Port Blair", "Silvassa"],
+            "Dadra and Nagar Haveli and Daman and Diu": ["Daman", "Diu", "Dadra"],
+
+        };
+
+        // Populate cities based on the selected state
+        if (cities[selectedState]) {
+            cityInput.innerHTML = ''; // Clear previous options
+
+            cities[selectedState].forEach(function (city) {
+                var option = document.createElement("option");
+                option.value = city;
+                option.text = city;
+                cityInput.appendChild(option);
+            });
+        }
+    }
+
+    // Attach the populateCities function to the change event of the State dropdown
+    document.getElementById("State").addEventListener("change", populateCities);
+
+    // Populate cities for the initial state on page load
+    populateCities();
+</script>
+
+<script src="~/js/site.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+

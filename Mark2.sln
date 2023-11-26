@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mark2API", "Mark2API\Mark2API.csproj", "{92B27990-664B-45A9-84AE-AE6A89AE4D7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mark2MVC", "Mark2MVC\Mark2MVC.csproj", "{EA9B7FC0-47D9-4328-9435-5263E9F46816}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92B27990-664B-45A9-84AE-AE6A89AE4D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B27990-664B-45A9-84AE-AE6A89AE4D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B27990-664B-45A9-84AE-AE6A89AE4D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B27990-664B-45A9-84AE-AE6A89AE4D7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9B7FC0-47D9-4328-9435-5263E9F46816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9B7FC0-47D9-4328-9435-5263E9F46816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9B7FC0-47D9-4328-9435-5263E9F46816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9B7FC0-47D9-4328-9435-5263E9F46816}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D74CFD5E-2ACF-4279-8AFC-3940DE4763AF}
+	EndGlobalSection
+EndGlobal

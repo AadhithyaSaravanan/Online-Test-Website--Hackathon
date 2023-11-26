@@ -1,0 +1,311 @@
+﻿body {
+    margin: 0;
+}
+
+.container1 {
+    position: relative;
+    background-color: rgba(255, 204, 204, 0.8);
+    width: 1250px;
+    height: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-left: -70px;
+    text-align: center;
+}
+
+.corner-image {
+    width: 300px;
+    height: auto;
+    margin: 10px;
+    position: absolute;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    animation: float 3s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10px, 10px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+
+
+
+.top-left {
+    top: 10px;
+    left: 10px;
+}
+
+.top-right {
+    top: 10px;
+    right: 10px;
+}
+
+.bottom-left {
+    bottom: 10px;
+    left: 10px;
+}
+
+.bottom-right {
+    bottom: 10px;
+    right: 10px;
+}
+
+/*Container2 Stylings*/
+/* Custom styles for the carousel */
+
+
+
+.container2 {
+    position: relative;
+    width: 320px;
+    margin: 100px auto 0 auto;
+    perspective: 1000px; /* Add perspective for 3D effect */
+    color: white;
+    margin-top:8px;
+}
+
+
+.carousel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotate360 60s infinite forwards linear;
+    margin-top:60px;
+}
+
+.carousel__face {
+    position: absolute;
+    width: 300px;
+    height: 187px;
+    top: 20px;
+    left: 10px;
+    right: 10px;
+    background-size: cover;
+    box-shadow: inset 0 0 0 2000px rgba(0,0,0,0.5);
+    display: flex;
+    transition: transform 0.5s; /* Add smooth transition */
+}
+
+   
+
+span {
+    margin: auto;
+    font-size: 2rem;
+}
+
+
+.carousel__face:nth-child(1) {
+    background-image: url("https://images.unsplash.com/photo-1659166898856-024909537d3e?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY( 0deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(2) {
+    background-image: url("https://images.unsplash.com/photo-1637580681839-6e3ed197ca93?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY( 40deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(3) {
+    background-image: url("https://images.unsplash.com/photo-1608600712992-03e5325d94c8?auto=format&fit=crop&q=80&w=1469&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY( 80deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(4) {
+    background-image: url("https://images.unsplash.com/photo-1593589279419-7da07fd2148d?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY(120deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(5) {
+    background-image: url("https://images.unsplash.com/photo-1620808629530-736c24a95f4b?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY(160deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(6) {
+    background-image: url("https://images.pexels.com/photos/5077393/pexels-photo-5077393.jpeg?auto=compress&cs=tinysrgb&w=600");
+    transform: rotateY(200deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(7) {
+    background-image: url("https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=1374&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY(240deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(8) {
+    background-image: url("https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY(280deg) translateZ(430px);
+}
+
+.carousel__face:nth-child(9) {
+    background-image: url("https://images.unsplash.com/photo-1484807352052-23338990c6c6?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    transform: rotateY(320deg) translateZ(430px);
+}
+
+
+
+@keyframes rotate360 {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(-360deg);
+    }
+}
+
+.contentfix {
+    background-color: rgba(173, 216, 230, 0.8);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 1250px;
+    height: 550px;
+    margin-top: 10px;
+    margin-left: -70px;
+    text-align: center;
+}
+
+/*Feature section*/
+.feature-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 50px;
+    background-image: url('https://images.unsplash.com/photo-1477346611705-65d1883cee1e?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin-top: 10px;
+    width: 1250px;
+    margin-top: 10px;
+    margin-left: -70px;
+    margin-right: -70px;
+    height: 400px;
+}
+
+
+
+.feature-box {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: rgba(76, 175, 80, 0.3); /* Transparent green background */
+    border: 2px solid rgba(56, 142, 60, 0.3); /* Transparent darker green border */
+   
+}
+    .feature-box img {
+        margin-bottom: 20px; /* Add space between image and text */
+        filter: invert(100%); /* Change image color to white */
+    }
+    .feature-box i {
+        color: white; /* Change icon color to white */
+        margin-bottom: 20px; /* Add space between icon and text */
+    }
+
+    .feature-box h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #fff; /* Updated heading color to white */
+    }
+
+    .feature-box p {
+        color: #fff;
+    }
+/*Carousel effect*/
+.tie-up-container {
+    width: 1250px; /* Set your desired max-width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    background-color: rgba(216, 191, 216, 0.8);
+    margin-top: 10px;
+    margin-left: -70px;
+    margin-right: -70px;
+    height: 400px;
+    text-align: center;
+}
+
+.company-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.company-item {
+    text-align: center;
+    margin: 10px;
+}
+
+    .company-item img {
+        width: 100px; /* Set the width of the company logos */
+        height: auto;
+    }
+
+    .company-item span {
+        display: block;
+        margin-top: 10px;
+    }
+/*section1 feature*/
+
+/*review section*/
+.reviews-section {
+    background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px;
+    width: 1250px;
+    height: 600px;
+    margin-top: 10px;
+    margin-left: -70px;
+    margin-right: -70px;
+    position: relative;
+}
+
+
+.review-card {
+    width: 250px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    height:500px;
+    margin-top:80px;
+}
+
+    .review-card img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%; /* Circular images */
+        margin-bottom: 15px;
+    }
+
+    .review-card p {
+        color: #333;
+    }
+
+
+

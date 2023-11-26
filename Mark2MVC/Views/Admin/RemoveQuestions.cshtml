@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@if (TempData["Message"] != null)
+{
+    <div id="messageDiv" class="alert alert-success">
+        @TempData["Message"]
+        @TempData.Remove("Message") <!-- Clear the TempData key after displaying -->
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div id="errorDiv" class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Questions</title>
+    <style>
+        body {
+            background-image: url('https://images.pexels.com/photos/35600/road-sun-rays-path.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Gradient background */
+            color: white;
+        }
+        .action-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .button-box {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+            .button-box button {
+                background-color: #2980b9;
+                margin: 10px;
+                padding: 15px 25px;
+                font-size: 18px;
+                text-decoration: none;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                .button-box button:hover {
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow on hover */
+                    transform: translateY(-2px);
+                    background-color: #2ecc71; /* Lift the button slightly on hover */
+                }
+
+
+        .form-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color:black;
+        }
+
+            .form-container.active {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .back-button button {
+            background-color: #e74c3c; /* Pleasant blue for buttons */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .back-button button:hover {
+                background-color: #2980b9; /* Darker blue on hover */
+            }
+    </style>
+</head>
+
+<body>
+    <div class="action-form">
+        <div class="button-box">
+            <button onclick="showForm('questionForm')">Delete by Question ID</button>
+            <button onclick="showForm('allQuestionsForm')">Delete All Questions</button>
+            <button onclick="showForm('courseAndLevelForm')">Delete by Course and Level</button>
+        </div>
+
+        <div id="questionForm" class="form-container">
+            <form asp-action="DeleteQuestion" asp-controller="Admin" method="post">
+                <div class="form-group">
+                    <label>Question ID:</label>
+                    <input type="text" name="id" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+
+        <div id="allQuestionsForm" class="form-container">
+            <form asp-action="DeleteAllQuestionsConfirmed" asp-controller="Admin" method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger">Delete All Questions</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="courseAndLevelForm" class="form-container">
+            <form asp-action="DeleteQuestionsByCourseAndLevelConfirm" method="post">
+                <div class="form-group">
+                    <label>Course:</label>
+                    <input type="text" name="course" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Level:</label>
+                    <input type="text" name="level" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+    <div class="back-button">
+        <button onclick="window.location.href='@Url.Action("Index", "Admin")'">Back to List</button>
+    </div>
+
+   <script>
+        function showForm(formId) {
+            var forms = document.querySelectorAll('.form-container');
+            forms.forEach(function (form) {
+                form.classList.remove('active');
+            });
+
+            document.getElementById(formId).classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+

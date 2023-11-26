@@ -1,0 +1,245 @@
+﻿@model IEnumerable<Mark2MVC.Models.TestResultReport>
+
+@{
+    ViewData["Title"] = "Test Results";
+}
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Gradient background */
+        color: blanchedalmond;
+    }
+
+    .form-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: linear-gradient(45deg, rgba(255, 0, 150, 0.6), rgba(0, 128, 255, 0.6)); /* Gradient background with transparency */
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        display: none;
+    }
+    /* Rest of your CSS remains unchanged */
+
+
+    .form-group {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        width: calc(90% - 2px); /* Adjust width for two fields with a little spacing */
+    }
+
+        .form-group .form-label {
+            margin-right: 10px;
+            width: 100px; /* Fixed width for labels */
+        }
+
+        .form-group .form-control {
+            flex: 1; /* Allow input to take remaining space */
+            padding: 8px;
+        }
+
+    .search-button {
+        background-color: #4CAF50; /* Green */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .search-button:hover {
+            background-color: #45a049; /* Darker Green */
+        }
+
+    .back-link {
+        display: block;
+        margin-top: 20px;
+        text-decoration: none;
+        color: #4169E1; /* Royal Blue */
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-family: 'Arial', sans-serif; /* Optional: Choose a suitable font */
+        color: #333; /* Default text color */
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd; /* Light gray border */
+            padding: 15px; /* Padding around content */
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #3498db; /* Blue */
+            color: white; /* White text on a colored background */
+        }
+
+        .table td {
+            background-color: #ecf0f1; /* Light Grayish Blue */
+        }
+
+        .table tr:nth-child(even) td {
+            background-color: #d5e8d4; /* Light Green for even rows */
+        }
+    .no-records {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f2f2f2;
+        border-radius: 5px;
+        color:black;
+        text-align:center;
+    }
+
+    .back-button button {
+        background-color: #e74c3c; /* Pleasant blue for buttons */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .back-button button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+</style>
+
+<h1>Test Result</h1>
+
+<button id="filterButton" class="btn btn-primary">Filter</button>
+<div id="filterContainer" class="form-container">
+    @using (Html.BeginForm("Search", "Test", FormMethod.Get))
+    {
+        <div class="form-group">
+            <label class="form-label">Course Name</label>
+            @Html.DropDownList("courseName", ViewData["CourseNames"] as SelectList, "Select a Course", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">State</label>
+            @Html.DropDownList("state", ViewData["States"] as SelectList, "Select a State", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">City</label>
+            @Html.DropDownList("city", ViewData["Cities"] as SelectList, "Select a City", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Level</label>
+            <select name="level" class="form-control">
+                <option value="" selected disabled hidden>Select Any One</option>
+                <option value="Level1">Level 1</option>
+                <option value="Level2">Level 2</option>
+                <option value="Level3">Level 3</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Minimum Marks</label>
+            @Html.TextBox("marks", null, new { @class = "form-control", placeholder = "Minimum Marks" })
+        </div>
+
+        <button type="submit" class="search-button">Search</button>
+    }
+</div>
+
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Mobile
+                </th>
+                <th>
+                    State
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Course Name
+                </th>
+                <th>
+                    Total Marks
+                </th>
+                <th>
+                    Level
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalMarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Level)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-records">No records are available. </div>
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // When the "Filter" button is clicked
+        $("#filterButton").click(function () {
+            // Toggle the visibility of the filter container
+            $("#filterContainer").toggle();
+        });
+    });
+</script>
+<div class="back-button">
+    <button onclick="window.location.href='@Url.Action("Index", "Admin")'">Back to List</button>
+</div>

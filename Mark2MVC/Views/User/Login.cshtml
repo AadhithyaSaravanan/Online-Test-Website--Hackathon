@@ -1,0 +1,72 @@
+﻿@model Mark2MVC.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="/css/Login.css">
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1671991397941-7680a21b2457?auto=format&fit=crop&q=80&w=1634&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        object-fit: cover;
+        object-position: center center;
+    }
+</style>
+
+<div class="login-container">
+    <h3>Login</h3>
+    <img src="https://media.istockphoto.com/id/1443265533/photo/businessman-working-with-laptop-golden-padlock-hologram-and-data-protection.jpg?s=612x612&w=0&k=20&c=U9W3FL35ggZ-AJxV3oV5lD2Css0nsY4SCMxxE7vzcG4=" alt="Login Image" class="profile-image">
+
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <i class="material-icons input-icon">email</i>
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <i class="material-icons input-icon" id="eyeIcon" onclick="togglePasswordVisibility('passwordInput')">visibility</i>
+
+            <input asp-for="Password" class="form-control" placeholder="Password" type="password" id="passwordInput" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <a asp-controller="PasswordReset" asp-action="ForgotPassword" class="forgot-password-link">Forgot Password?</a>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+    <div>
+        Don't have an account? <a asp-action="Register" class="register">Register here</a>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.textContent = 'visibility_off';
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.textContent = 'visibility';
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,140 @@
+﻿@model List<Mark2MVC.Models.TestResultReport>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://images.pexels.com/photos/6806484/pexels-photo-6806484.jpeg'); /* Replace with your background image URL */
+        background-size: cover;
+        background-position: center;
+        color: darkred;
+        text-align:center;/* Text color on the background image */
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .table {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the table */
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+        .table th,
+        .table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #3498db; /* Header background color */
+            color: white;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background for odd rows */
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for even rows */
+        }
+
+    .btn-primary {
+        background-color: #3498db; /* Button primary color */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9; /* Button hover color */
+        }
+
+    .error-message {
+        color: #e74c3c; /* Error message color */
+        font-weight: bold;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    .back-button button {
+        background-color: #e74c3c; /* Pleasant blue for buttons */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .back-button button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+</style>
+
+<div class="container">
+    <h2>Filtered Results</h2>
+
+    @if (Model.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>FullName</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>CourseName</th>
+                        <th>TotalMarks</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in Model)
+                    {
+                        <tr>
+                            <td>@result.FullName</td>
+                            <td>@result.Email</td>
+                            <td>@result.Mobile</td>
+                            <td>@result.State</td>
+                            <td>@result.City</td>
+                            <td>@result.CourseName</td>
+                            <td>@result.TotalMarks</td>
+                            <td>@result.Level</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <form asp-controller="Test" asp-action="GeneratePDF" method="post">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <input type="hidden" name="searchResults[@i].FullName" value="@Model[i].FullName" />
+                <input type="hidden" name="searchResults[@i].Email" value="@Model[i].Email" />
+                <input type="hidden" name="searchResults[@i].Mobile" value="@Model[i].Mobile" />
+                <input type="hidden" name="searchResults[@i].State" value="@Model[i].State" />
+                <input type="hidden" name="searchResults[@i].City" value="@Model[i].City" />
+                <input type="hidden" name="searchResults[@i].CourseName" value="@Model[i].CourseName" />
+                <input type="hidden" name="searchResults[@i].TotalMarks" value="@Model[i].TotalMarks" />
+                <input type="hidden" name="searchResults[@i].Level" value="@Model[i].Level" />
+            }
+            <button type="submit" class="btn btn-primary">Download Records</button>
+        </form>
+    }
+
+    else if (Model.Count == 0)
+    {
+        <p class="error-message">@ViewBag.ErrorMessage</p>
+    }
+</div>
+<div class="back-button">
+    <button onclick="window.location.href='@Url.Action("Index", "Test")'">Back to List</button>
+</div>

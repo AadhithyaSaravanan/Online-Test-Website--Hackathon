@@ -1,0 +1,216 @@
+﻿@model Mark2MVC.Models.Question
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/3575654/pexels-photo-3575654.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Gradient background */
+        color: blanchedalmond;
+    }
+
+    .form-container {
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #3e4651; /* Dark gray background */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        text-align: center;
+        margin-top:30px;
+    }
+
+        .form-container input[type="file"] {
+            margin-bottom: 20px;
+            background-color: #505a64; /* Darker gray input background */
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff; /* Light text color */
+        }
+
+        .form-container button[type="submit"] {
+            background-color: #4CAF50; /* Green button background */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            .form-container button[type="submit"]:hover {
+                background-color: #45a049; /* Darker green on hover */
+            }
+
+    .table-container {
+        margin-top: 20px;
+        background: linear-gradient(to right, #ff7e5f, #feb47b, #ffcc67, #aaffa9); /* Gradient background */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow-x: auto; /* Enable horizontal scrolling if needed */
+    }
+
+
+
+        .table-container table {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        .table-container th,
+        .table-container td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ffff; /* Darker purple border bottom */
+        }
+        .table-container th {
+            background-color: #3caea3; /* Pleasant teal background for headers */
+            color: white;
+        }
+
+        .table-container tr:nth-child(even) {
+            background-color: #e94560; /* Lighter coral background for even rows */
+        }
+
+    .btn-primary {
+        background-color: #3498db;
+        padding: 10px 20px; /* Pleasant blue for buttons */
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+    .back-to-list {
+        color: #3498db; /* Pleasant blue for the "Back to List" link */
+        text-decoration: none;
+        margin-top: 20px;
+        display: inline-block;
+    }
+
+        .back-to-list:hover {
+            color: #2980b9; /* Darker blue on hover */
+        }
+
+    .back-button button {
+        background-color: black; /* Pleasant blue for buttons */
+        color: #2980b9;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top:35px;
+    }
+
+        
+   
+</style>
+
+
+@if (TempData["UploadMessage"] != null)
+{
+    <div class="alert alert-success mt-3">
+        @TempData["UploadMessage"]
+    </div>
+}
+
+@if (TempData["UploadErrors"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        @TempData["UploadErrors"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger mt-3">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@using (Html.BeginForm("UploadExcel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <label for="uploadedFile">Upload Excel File:</label>
+        <input type="file" name="uploadedFile" class="form-control-file" />
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </div>
+}
+
+<!-- ADD Question --Create  -->
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddQuestions">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (TempData["CreateMessage"] != null)
+            {
+                <div class="alert alert-success mt-3">
+                    @TempData["CreateMessage"]
+                </div>
+            }
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>CourseId</th>
+                            <th>Questions</th>
+                            <th>Option1</th>
+                            <th>Option2</th>
+                            <th>Option3</th>
+                            <th>Option4</th>
+                            <th>Correct Answer</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input asp-for="CourseId" class="form-control" />
+                                <span asp-validation-for="CourseId" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Questions" class="form-control" />
+                                <span asp-validation-for="Questions" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Option1" class="form-control" />
+                                <span asp-validation-for="Option1" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Option2" class="form-control" />
+                                <span asp-validation-for="Option2" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Option3" class="form-control" />
+                                <span asp-validation-for="Option3" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Option4" class="form-control" />
+                                <span asp-validation-for="Option4" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="CorrectAnswer" class="form-control" />
+                                <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input asp-for="Level" class="form-control" />
+                                <span asp-validation-for="Level" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="back-button">
+    <button onclick="window.location.href='@Url.Action("Index", "Admin")'">Back to List</button>
+</div>
+
+

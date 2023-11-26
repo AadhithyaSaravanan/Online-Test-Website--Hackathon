@@ -1,0 +1,538 @@
+﻿@model List<Question>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  
+    <title>Test Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0; /* Remove default margin */
+            overflow:hidden;
+        }
+
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 20px;
+            background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 93.6%);
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+            margin-top: 25px; /* Soft box shadow */
+        }
+
+        .question-container {
+            margin: 20px 0;
+        }
+
+        .question-card {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 3px solid #cccccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333333;
+        }
+
+        h3 {
+            font-weight: bold;
+            color: black; /* Pink color for question headings */
+        }
+
+        label {
+            font-weight: bold;
+            color: #333333;
+        }
+
+        .navigation-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: darkcyan; /* Pink color for buttons */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: darkgreen; /* Lighter pink color on hover */
+            }
+
+        .question-status {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .status-box {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-left: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 50%;
+            background-color: white; /* Pink color for question status boxes */
+        }
+
+        .current {
+            background-color: lightseagreen; /* Lighter pink color for current question status box */
+        }
+
+        #timerDisplay {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: black; /* Pink color for timer */
+        }
+
+
+        /* Add styles for the sidebar and question numbers */
+        /* Updated sidebar styles */
+        .sidebar {
+            position: fixed;
+            top: 76px;
+            left: -250px; /* Initially hide the sidebar off-screen */
+            width: 220px;
+            height: 100%;
+            background-color: #111;
+            padding-top: 20px;
+            color: white;
+            z-index: 1;
+            box-shadow: 5px 0 10px rgba(0, 0, 0, 0.2); /* Shadow on the right side */
+            transition: left 0.3s ease; /* Add smooth transition effect for sliding */
+        }
+
+            .sidebar.open {
+                left: 0; /* Slide the sidebar in when it has the "open" class */
+            }
+
+
+
+
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        .square-container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+
+        .square {
+            width: 30px;
+            height: 30px;
+            background-color: #555;
+            margin: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Add smooth transition */
+        }
+
+            .square.active {
+                background-color: lightseagreen; /* Change the background color for the active question */
+                color: white;
+            }
+
+            .square.attend {
+                background-color: #4caf50; /* Green background for attended questions */
+                color: white;
+            }
+
+            .square.unattended {
+                background-color: #f44336; /* Red background for unattended questions */
+                color: white;
+            }
+
+            /* Highlight active question on hover */
+            .square:hover {
+                background-color: #333;
+            }
+
+        /* Scrollbar styles for the sidebar */
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+            .sidebar::-webkit-scrollbar-thumb:hover {
+                background-color: #555;
+            }
+
+        .sidebar-toggle-btn {
+            position: fixed;
+            top: 110px;
+            right: 140px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 2;
+            background-color: darkolivegreen;
+            border: none;
+            color: white;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Add this div for the sidebar containing question numbers -->
+    <!-- Add this div for the updated sidebar containing question numbers -->
+    <!-- Sidebar -->
+    <button id="sidebarToggleBtn" class="sidebar-toggle-btn">☰</button>
+
+    <!-- Sidebar content goes here -->
+    <div class="sidebar">
+        <h2>Status Box</h2>
+        <div class="square-container">
+            @for (var i = 0; i < Model.Count; i++)//loop through the quesstion model
+            {
+                var question = Model[i];//assign value to the current item to the variable
+                <div class="square @((i == 0) ? "active" : "")" data-question-index="@i" onclick="goToQuestion(@i)"><!--square with displaying questions and click to go on to the question-->
+                    @((i + 1)) <!--display the question number from start-->
+                </div>
+            }
+        </div>
+    </div>
+    <div class="container">
+
+        <h1>Test Questions</h1>
+        <form asp-controller="Course" asp-action="SubmitAnswers" method="post">
+            <div class="question-container">
+
+                <div id="questionCount" style="text-align: right; margin-top: 10px; color: darkmagenta;"></div><!--attende/unattended-->
+                @for (var i = 0; i < Model.Count; i++)// loop through questions
+                {
+                    var question = Model[i];// assign the current question
+                    //represent questioncard by showing first and hiding all others
+                    <div class="question-card" style="display: @(i == 0 ? "block" : "none");">
+                        <h4>@question.Questions</h4>
+                        <!--radio button for each option with unique question id and different value to select one option-->
+                        <label><input type="radio" name="selectedAnswer_@question.QuestionId" value="Option1" onclick="updateSelectedOption(@question.QuestionId, 'Option1')"> @question.Option1</label><br>
+                        <label><input type="radio" name="selectedAnswer_@question.QuestionId" value="Option2" onclick="updateSelectedOption(@question.QuestionId, 'Option2')"> @question.Option2</label><br>
+                        <label><input type="radio" name="selectedAnswer_@question.QuestionId" value="Option3" onclick="updateSelectedOption(@question.QuestionId, 'Option3')"> @question.Option3</label><br>
+                        <label><input type="radio" name="selectedAnswer_@question.QuestionId" value="Option4" onclick="updateSelectedOption(@question.QuestionId, 'Option4')"> @question.Option4</label><br>
+
+                        <input type="hidden" name="questionId" value="@question.QuestionId" /><!--ensure that question id is submitting along with the form-->
+                    </div>
+                }
+            </div>
+
+            
+            <div class="question-status"></div><!--question status inside card-->
+            <div id="timerDisplay"></div><!--timer display-->
+            <button type="button" class="btn btn-secondary" onclick="showSubmitConfirmation()">Submit</button><!--submit the form-->
+        </form>
+        <!--navigation buttons for previous and next-->
+        <div class="navigation-buttons">
+            <button id="prevButton" onclick="goToPreviousQuestion()">Previous</button>
+            <button id="nextButton" onclick="goToNextQuestion()">Next</button>
+        </div>
+        <!-- Add this div for question count -->
+
+
+
+
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+        // Deserialize the JSON representation of the Model from the server-side
+        const questions = @Html.Raw(Json.Serialize(Model));
+        // Select all HTML elements with the class 'question-card' and assign them to the variable 'questionCards'
+        const questionCards = document.querySelectorAll(".question-card");
+        // Select the HTML element with the id 'prevButton' and assign it to the variable 'prevButton'
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+        const timerDisplay = document.getElementById("timerDisplay");
+        const squares = document.querySelectorAll('.square');
+
+        let currentQuestion = 0;//Initializes the variable currentQuestion to 0, representing the index of the current question.
+        let userAnswers = new Array(questions.length).fill(null);// Initializes an array userAnswers with a length equal to the number of questions, filled with null values.
+        let timer;
+
+        function updateQuestionStatus() {
+            questionStatus.innerHTML = "";
+            for (let i = 0; i < questions.length; i++) {
+                const statusBox = document.createElement("div");
+                statusBox.className = "status-box";
+                statusBox.textContent = i + 1;
+                if (i === currentQuestion) {
+                    statusBox.classList.add("current");
+                }
+                questionStatus.appendChild(statusBox);
+            }
+        }
+
+        function showQuestion(questionIndex) {
+            questionCards.forEach((card, index) => {//loop through question
+                card.style.display = index === questionIndex ? "block" : "none";//show the first question and hide all
+            });
+            updateSquares();//also that
+        }
+
+        function goToNextQuestion() {
+            // Check if there is a next question (not at the last question).
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;//increment
+                showQuestion(currentQuestion);//show question
+                updateQuestionStatus();//also that
+                updateSquares();
+            }
+        }
+
+        function goToPreviousQuestion() {
+            // Check if there is a previous question (not at the first question).
+            if (currentQuestion > 0) {
+                currentQuestion--;//decrement
+                showQuestion(currentQuestion);
+                updateQuestionStatus();
+                updateSquares();
+            }
+        }
+
+        //sidebar
+        function goToQuestion(questionIndex) {
+            // Set the currentQuestion to the specified questionIndex.
+            currentQuestion = questionIndex;
+            showQuestion(currentQuestion);  // Show the question associated with the updated currentQuestion.
+            updateQuestionStatus();//also update there
+            updateSquares();
+        }
+
+        //update square
+
+
+
+
+        function updateSquares() {
+            // Iterate through each square using forEach method.
+            squares.forEach((square, index) => {
+                // Check if the index matches the currentQuestion.
+                if (index === currentQuestion) {
+                    // If true, add the 'active' class to highlight the square.
+                    square.classList.add('active');
+                } else {
+                    // If false, remove the 'active' class to de-highlight the square.
+                    square.classList.remove('active');
+                }
+            });
+        }
+
+        function checkAndUpdateSidebarSquare(questionIndex) {
+            // Get the question object from the questions array based on the specified index.
+
+            const question = questions[questionIndex];
+            // Get the corresponding square element from the squares array.
+            const square = squares[questionIndex];
+
+            if (question.userAnswer !== null) {
+                // User has selected an option, update sidebar square to green
+                square.classList.add('attend');
+            } else {
+                // User has not selected an option, remove active class to reset the color
+                square.classList.remove('attend');
+            }
+        }
+
+        //update questions
+        function updateQuestionStatus() {
+            // Get the element with the class 'question-status'
+            const questionStatus = document.querySelector('.question-status');
+            if (questionStatus) {
+                // Update the text content of 'question-status' with the current question number and total questions
+                questionStatus.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            }
+        }
+        // After populating questions array
+        function updateSelectedOption(questionId, selectedOption) {
+            // Find the question with the given questionId in the questions array
+            const questionToUpdate = questions.find(q => q.questionId === questionId);
+
+            // Ensure the question with the provided questionId exists in the questions array
+            if (questionToUpdate) {
+                // Update the user's answer for the specific question directly
+                questionToUpdate.userAnswer = selectedOption;
+                console.log(`Question ${questionId} - User's answer: ${selectedOption}`);//store in console
+                checkAndUpdateSidebarSquare(questions.findIndex(q => q.questionId === questionId));
+
+            } else {
+                // Handle the case where the provided questionId does not match any question in the array
+                console.error(`Question with id ${questionId} not found in the questions array.`);
+            }
+            updateQuestionCount();
+
+        }
+
+        // Function to show SweetAlert when submitting without answering all questions
+        function showSubmitConfirmation() {
+            // Filter questions that have not been answered by the user
+            const unattendedQuestions = questions.filter(question => !question.userAnswer);
+            // Check if there are unattended questions
+            if (unattendedQuestions.length > 0) {
+                // Display a confirmation dialog using SweetAlert (Swal)
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You have not answered all questions. Do you want to submit?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, submit it!',
+                    cancelButtonText: 'No, keep working'
+                }).then((result) => {
+                    // Check the user's choice in the confirmation dialog
+                    if (result.isConfirmed) {
+                        // If there are no unattended questions, directly calculate and show the result
+
+                        calculateAndShowResult();
+                    }
+                });
+            } else {
+                calculateAndShowResult();
+            }
+        }
+
+        // Function to count attended and unattended questions
+        function updateQuestionCount() {
+            // Filter questions that have been attended and those that are unattended
+            const attendedQuestions = questions.filter(question => question.userAnswer);
+            const unattendedQuestions = questions.filter(question => !question.userAnswer);
+            //// Get the counts of attended and unattended questions
+            const attendedCount = attendedQuestions.length;
+            const unattendedCount = unattendedQuestions.length;
+            // Get the HTML element with the id 'questionCount'
+            const questionCountElement = document.getElementById('questionCount');
+            if (questionCountElement) {
+                // Update the text content of the element to display the counts
+                questionCountElement.textContent = `Attended: ${attendedCount} | Unattended: ${unattendedCount}`;
+            }
+        }
+
+
+
+
+
+        function startTimer(duration) {
+            // Initialize the timer with the provided duration
+            let timer = duration;
+            const interval = setInterval(function () {//The setInterval function is a built-in JavaScript function that repeatedly calls a provided function at a specified interval.
+                // Calculate minutes and seconds from the remaining time
+                const minutes = Math.floor(timer / 60);
+                const seconds = timer % 60;
+                // Display the remaining time in the specified format
+                timerDisplay.textContent = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                // Check if the timer has reached zero (time is up)
+                if (--timer < 0) {
+                    // If time is up, clear the interval
+                    clearInterval(interval);
+                    alert("Time's up!");
+                    calculateAndShowResult(); // Automatically submit when time is up
+                }
+            }, 1000);// The interval runs every 1000 milliseconds (1 second)
+        }
+        function calculateAndShowResult() {
+            // Extract courseName from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseName = urlParams.get('courseName');
+
+
+            // Initialize totalMarks to 0
+            let totalMarks = 0;
+            // Iterate through each question in the questions array
+            for (let i = 0; i < questions.length; i++) {
+                const question = questions[i];
+                // Check if the user's answer matches the correct answer for the question
+
+                if (question.userAnswer === question.correctAnswer) {
+                    totalMarks++;//increment
+                }
+            }
+
+            const message = totalMarks > 1 ? "Congratulations! You have passed to Level 2." : "Sorry, you are not qualified.";
+
+            const level = "Level1";
+            // Create a form element
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/Exam/ResultPage'; // Set the target URL
+
+            // Create hidden input fields for parameters
+            const totalMarksInput = document.createElement('input');
+            totalMarksInput.type = 'hidden';
+            totalMarksInput.name = 'totalMarks';
+            totalMarksInput.value = totalMarks; // Set the value to be passed
+
+            const messageInput = document.createElement('input');
+            messageInput.type = 'hidden';
+            messageInput.name = 'message';
+            messageInput.value = message; // Set the value to be passed
+
+            const courseNameInput = document.createElement('input');
+            courseNameInput.type = 'hidden';
+            courseNameInput.name = 'courseName';
+            courseNameInput.value = courseName; // Set the value to be passed
+
+            const levelInput = document.createElement('input');
+            levelInput.type = 'hidden';
+            levelInput.name = 'Level';
+            levelInput.value = level; // Set the value to be passed
+
+            // Append input fields to the form
+            form.appendChild(totalMarksInput);
+            form.appendChild(messageInput);
+            form.appendChild(courseNameInput);
+            form.appendChild(levelInput);
+
+            // Append the form to the document body and submit it
+            document.body.appendChild(form);
+            form.submit();
+
+            // Remove the form from the DOM after submission (optional)
+            document.body.removeChild(form);
+
+
+
+        }
+
+        // Select the HTML element with the class 'sidebar' and assign it to the variable 'sidebar'
+
+        const sidebar = document.querySelector('.sidebar');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');//used to open sidebar
+        }
+
+        // Add an event listener to a button or icon to toggle the sidebar
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        sidebarToggleBtn.addEventListener('click', toggleSidebar);
+
+        // Call functions to update question count, question status, show the current question, and start the timer
+
+        updateQuestionCount();
+        updateQuestionStatus();
+        showQuestion(currentQuestion);
+        startTimer(300);
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+﻿.right-section {
+    /* Your existing styles for the right section */
+    flex: 1; /* Decreased flex size */
+    max-width: calc(40% - 10px); /* Adjusted the max-width */
+    text-align: center;
+    margin-left: 2px; /* Adjust the margin as needed */
+    overflow: hidden; /* Hide overflowing content */
+    position: relative; /* Position for absolute image */
+}
+
+.image-slider {
+    /* Your existing styles for the image slider container */
+    display: flex;
+    width: 102%; /* Reduced image size */
+    max-width: 112%; /* Set width to 100% for single image display */
+    position: relative;
+}
+
+    .image-slider img {
+        /* Your existing styles for the image */
+        width: 102%; /* Reduced image size */
+        max-width: 112%; /* Full width for the image */
+        height: auto;
+        border-radius: 0; /* Remove border-radius to prevent oval shape */
+        margin-left: 5px;
+        margin-top: 5px;
+        position: absolute; /* Position images absolutely */
+        opacity: 0; /* Initially hide images */
+        transition: opacity 1s; /* Smooth fade-in transition */
+    }
+
+        .image-slider img.active {
+            opacity: 1; /* Show active image */
+        }
+
+@keyframes slide {
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(100%);
+    }
+
+    75% {
+        transform: translateX(-100%);
+    }
+}
+
+
+
+
+
+.profile-card {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 50%;
+    box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
+    transition: all .4s;
+    margin: 0 20px;
+    transform-origin: center center;
+   /* animation: pulse 2s infinite alternate;  Pulse effect animation */
+}
+
+@keyframes pulse {
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.profile-card:hover {
+    border-radius: 10px;
+    height: 260px;
+    box-shadow: 0 0 20px rgba(255, 165, 0, 0.8), 0 0 40px rgba(255, 165, 0, 0.6), 0 0 80px rgba(255, 165, 0, 0.4); /* Customized shadow with extra glow effect */
+    
+}
+
+
+
+.profile-card .img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.profile-card:hover img {
+    border-radius: 10px;
+    transform: translateY(-70px);
+    filter: grayscale(100%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.img img {
+    object-fit: fill;
+    width: 100%;
+    border-radius: 50%;
+    transition: all .4s;
+    z-index: 99;
+}
+
+.caption {
+    text-align: center;
+    transform: translateY(-90px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s;
+}
+
+.profile-card:hover .caption {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.caption h3 {
+    font-size: 21px;
+    color: #0c52a1;
+    font-weight: 600;
+}
+
+.caption h5 {
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+}
+
+.caption p1 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 2px 0 12px 0;
+}
+
+.caption .social-links i {
+    font-size: 21px;
+    margin: 0 3px;
+    cursor: pointer;
+    color: #333;
+    transition: all .4s;
+}
+
+    .caption .social-links i:hover {
+        color: #0c52a1;
+    }
+

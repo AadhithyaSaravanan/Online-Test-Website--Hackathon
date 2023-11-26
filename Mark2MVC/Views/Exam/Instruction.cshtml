@@ -1,0 +1,86 @@
+﻿@model Mark2MVC.Models.Question
+@{
+    ViewData["Title"] = "Exam Instruction";
+    string courseName = Context.Request.Query["courseName"].ToString();
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+
+
+<style>
+    body {
+        background-color: #D9AFD9;
+        background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-image: radial-gradient( circle 369px at -2.9% 12.9%, rgba(247,234,163,1) 0%, rgba(236,180,238,0.56) 46.4%, rgba(163,203,247,1) 100.7% ); /* Light coral background for the container */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .instructions {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+    .start-button {
+        margin-top: 30px;
+    }
+
+    .sidebar-toggle-btn {
+        
+        background-color: darkolivegreen;
+        border: none;
+        color: white;
+        outline: none;
+    }
+</style>
+
+
+
+<div class="container">
+    <h1>Welcome to the Online Technical Exam for @courseName </h1>
+
+    <div class="instructions">
+        <h2>Instructions for the Exam:</h2>
+        <ol>
+            <li>This exam contains technical questions related to the course.</li>
+            <li>You will have a limited time to complete the exam. Make sure to manage your time wisely.</li>
+            <li>Once you start the exam, you cannot pause or reset the timer.</li>
+            <li>For each question, select the correct answer from the multiple-choice options.</li>
+            <li>You can navigate between questions using the navigation buttons.</li>
+            <li>Review your answers before submitting the exam.</li>
+            <li>After submitting, you will see your score and can review your answers.</li>
+            <li>
+                Click the <button id="sidebarToggleBtn" class="sidebar-toggle-btn">☰</button> toggle button to check the question status and
+                attended questions.
+            </li>
+            <li>
+                If a question is selected, the status will change to <i class="fas fa-square" style="color: green;"></i>
+                indicating that the question is attended.
+            </li>
+        </ol>
+    </div>
+
+    <div class="start-button">
+        <a asp-controller="Exam" asp-action="LevelOne" asp-route-courseName="@courseName" class="btn btn-primary start-test-button">Start Test</a>
+    </div>
+</div>
+
+<script>
+    // Add a click event listener to "Start Test" buttons
+
+</script>
+
+
+

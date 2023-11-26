@@ -1,0 +1,194 @@
+﻿@{
+    ViewData["Title"] = "Result Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1498429089284-41f8cf3ffd39?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #2C3E50;
+            
+        }
+
+        .result-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 50px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            background-color: darkcyan;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: grey;
+        }
+
+        .emoji {
+            position: fixed;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+        }
+
+        .rocket {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 50px;
+            background-color: #ff4500; /* Rocket color */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="emoji-container"></div>
+
+    <!-- Rising rockets container -->
+    <div class="rocket-container"></div>
+
+    <div class="result-section">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["SuccessMessage"]
+            </div>
+            <h1>Result</h1>
+            <table class="table table-bordered" style="border-width: 3px;border-color: black;">
+                <tr>
+                    <td>Name</td>
+                    <td>@ViewBag.UserDetails</td>
+                </tr>
+                <tr>
+                    <td>Total Marks</td>
+                    <td>@ViewBag.TotalMarks</td>
+                </tr>
+                <tr>
+                    <td>Message</td>
+                    <td>@ViewBag.Message</td>
+                </tr>
+                <tr>
+                    <td>Course Name</td>
+                    <td>@ViewBag.CourseName</td>
+                </tr>
+                <tr>
+                    <td>Level</td>
+                    <td>@ViewBag.Level</td>
+                </tr>
+            </table>
+
+            @if (ViewBag.TotalMarks > 1)
+            {
+                @if (@ViewBag.Level.Contains("Level1"))
+                {
+                    <form id="levelTwoForm" action="/Exam/LevelTwo" method="get">
+                        <input type="hidden" id="courseName" name="courseName" value="@ViewBag.CourseName" />
+                        <button type="submit" class="btn btn-primary">Access Level 2 Questions</button>
+                    </form>
+                }
+                else if (@ViewBag.Level.Contains("Level2"))
+                {
+                    <form id="levelThreeForm" action="/Exam/LevelThree" method="get">
+                        <input type="hidden" id="courseName" name="courseName" value="@ViewBag.CourseName" />
+                        <button type="submit" class="btn btn-primary">Access Level 3 Questions</button>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-success" role="alert">
+                        Thank you for attending our exam.
+                    </div>
+                    <a href="/Exam/Index" class="btn btn-primary">Exit</a>
+                }
+            }
+
+            @if (ViewBag.TotalMarks <= 1)
+            {
+                <div class="alert alert-danger" role="alert">
+                    As you failed to clear this level, kindly exit to rewrite the exam or logout from this page.
+                </div>
+                <a href="/Exam/Index" class="btn btn-primary">Exit</a>
+            }
+        }
+    </div>
+
+
+    <script>
+        // Function to create falling emojis
+        function createEmoji(isHappy) {
+            const emojis = isHappy ? ['🎉', '😊', '🚀', '🌟', '❤️', '🎈'] : ['😢', '😔', '😞', '💔']; // Happy emojis and sad emojis
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.style.left = `${Math.random() * 100}vw`;
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            document.querySelector('.emoji-container').appendChild(emoji);
+
+            var posY = -50;
+            var velocity = 2; // Adjust the falling speed if necessary
+            var startTime = Date.now();
+
+            function update() {
+                var currentTime = Date.now() - startTime;
+                posY += velocity;
+                emoji.style.top = posY + 'px';
+
+                if (posY >= window.innerHeight || currentTime > 12000) {
+                    emoji.remove();
+                } else {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            update();
+        }
+
+        // Determine if the emoji should be happy or sad based on ViewBag.TotalMarks
+        var isHappyEmoji = @((int)ViewBag.TotalMarks) > 1;
+
+        // Create falling emojis every 1 second
+        setInterval(() => {
+            createEmoji(isHappyEmoji);
+        }, 1000);
+
+    </script>
+
+    
+</body>
+
+</html>
+
+
+
+
+
+
+
+

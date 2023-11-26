@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Mark2MVC.Models.Question>
+
+@{
+    ViewData["Title"] = "Fetch";
+}
+
+<style>
+    body {
+        background-image: url('https://images.pexels.com/photos/355853/pexels-photo-355853.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        color: white;
+    }
+
+    .table-container {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #4CAF50; /* Green background for table header */
+            color: white;
+        }
+
+        .table td {
+            background-color: #333;
+            color:white/* Dark background for table data cells */
+        }
+
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border: 1px solid #f5c6cb;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .back-button button {
+        background-color: #e74c3c; /* Pleasant blue for buttons */
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top:35px;
+    }
+
+        .back-button button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+</style>
+
+@if (Model != null && Model.Any())
+{
+    <h1>Questions</h1>
+
+    <div class="table-container">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Question Id</th>
+                    <th>CourseId</th>
+                    <th>CourseName</th>
+                    <th>Question</th>
+                    <th>Option1</th>
+                    <th>Option2</th>
+                    <th>Option3</th>
+                    <th>Option4</th>
+                    <th>Correct Answer</th>
+                    <th>Level</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model)
+                {
+                    <tr>
+                        <td>@question.QuestionId</td>
+                        <td>@question.CourseId</td>
+                        <td>@question.Course.CourseName</td>
+                        <td>@question.Questions</td>
+                        <td>@question.Option1</td>
+                        <td>@question.Option2</td>
+                        <td>@question.Option3</td>
+                        <td>@question.Option4</td>
+                        <td>@question.CorrectAnswer</td>
+                        <td>@question.Level</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="back-button">
+        <button onclick="window.location.href='@Url.Action("Index", "Admin")'">Back to List</button>
+    </div>
+}
+else
+{
+    <div class="alert mt-3">
+        No questions are available.
+    </div>
+    <div class="back-button">
+        <button onclick="window.location.href='@Url.Action("Index", "Admin")'">Back to List</button>
+    </div>
+}
+

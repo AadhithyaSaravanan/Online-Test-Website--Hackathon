@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Exam Page";
+}
+@if (ViewData["WelcomeMessage"] != null)
+{
+    <div class="welcome-message">
+        <h2 class="welcome-message-text">@ViewData["WelcomeMessage"]</h2>
+    </div>
+}
+
+  <style>
+
+    .card {
+        position: relative; /* Add relative positioning */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        margin-bottom: 20px;
+        overflow: hidden; /* Hide overflow to keep lines inside the card */
+        border: 2px solid #3498db; /* Default border color */
+        border-radius: 10px;
+        box-shadow: 0 0 10px #27ae60, 0 0 20px #27ae60, 0 0 30px #27ae60; /* Neon glow effect */
+        /* Neon glow effect */
+        transition: box-shadow 0.5s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #e74c3c, 0 0 20px #e74c3c, 0 0 30px #e74c3c; /* Adjusted color for glow on hover */
+            /* Adjusted color for glow on hover */
+            /* Scale the container to 105% on hover */
+        }
+</style>
+
+<link rel="stylesheet" type="text/css" href="/css/Exam.css">
+
+
+<div class="page-container">
+    <div class="text-center">
+        <h1 class="display-4">Welcome to the Exam Page</h1>
+        <p>Learn about exams and testing.</p>
+    </div>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    @if (item.Image != null && item.Image.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="Course Logo" class="Course-logo" />
+                    }
+
+                    <div class="card-body">
+                        <h5 class="card-title">@item.CourseName</h5>
+                        <p class="card-text">@item.Description</p>
+                        <a asp-controller="Exam" asp-action="Instruction" asp-route-courseName="@item.CourseName" class="btn btn-secondary btn-start-test">Start Test</a>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

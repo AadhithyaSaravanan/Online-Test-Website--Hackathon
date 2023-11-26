@@ -1,0 +1,140 @@
+﻿@model Mark2MVC.Models.Course
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit</title>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1482784160316-6eb046863ece?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Gradient background */
+            color: blanchedalmond;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+          
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+
+            .form-group input[type="text"],
+            .form-group input[type="file"] {
+                width: 320px;
+                padding: 10px;
+                font-size: 16px;
+                border: none;
+                background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+                border-radius: 5px;
+            }
+
+            .form-group input[type="submit"] {
+                background-color: #4CAF50; /* Green button */
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease; /* Increase button padding */
+            }
+
+                .form-group input[type="submit"]:hover {
+                    background-color: #45a049; /* Darker green on hover */
+                }
+
+        a {
+            color: #4CAF50; /* Green link */
+        }
+
+            a:hover {
+                color: #45a049; /* Darker green on hover */
+            }
+
+
+        .back-button button {
+            background-color: #e74c3c; /* Pleasant blue for buttons */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+           
+        }
+
+            .back-button button:hover {
+                background-color: #2980b9; /* Darker blue on hover */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Course</h2>
+        <hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input asp-for="CourseId" type="hidden" />
+           
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+               
+                @if (Model.Image != null && Model.Image.Length > 0)
+                {
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="Existing Image" class="img-thumbnail" width="100" />
+                    <input type="hidden" asp-for="Image" />
+                }
+                <input asp-for="Image" type="file" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="back-button">
+    <button onclick="window.location.href='@Url.Action("CourseIndex", "Course")'">Back to List</button>
+</div>
+    </div>
+</body>
+</html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

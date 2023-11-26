@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HACKATHON</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Mark2MVC.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Add the favicon link here -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+   
+    <style>
+        /* Custom Navbar Styling */
+        .navbar {
+            background: linear-gradient(to right, #6a0572, #00b89f); /* Gradient background color */
+            color: white; /* White text color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+            backdrop-filter: blur(10px); /* Apply blur effect for a transparent look */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem; /* Larger font size for the logo */
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important; /* White text color for navbar links */
+            margin-right: 15px; /* Add some spacing between navbar items */
+        }
+
+        .navbar-toggler-icon {
+            background-color: white; /* White color for the hamburger icon */
+        }
+
+        .navbar-toggler {
+            border-color: white; /* White border color for the hamburger button */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FFC107 !important; /* Change color on hover */
+        }
+
+        .hide-navbar .navbar {
+            display: none;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light">
+
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color:white">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJUCTt_glwuV6xHtJwW8FTzwbajGoqIw6bjA&usqp=CAU" alt="Logo" style="width: 50px; height: 50px; border-radius: 50%;"> HACKATHON
+
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- ... (previous HTML code) ... -->
+                <!-- ... (previous HTML code) ... -->
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between w-100">
+                    <!-- Align items between and take full width -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="User" asp-action="Register">
+                                <i class="fas fa-user-plus"></i> Register
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AboutUs">
+                                <i class="fas fa-info-circle mr-2"></i> About Us
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            @{
+                                var userEmail = Context.Request.Cookies["jwt"];
+                                if (string.IsNullOrEmpty(userEmail))
+                                {
+                                    <a class="nav-link" asp-area="" asp-controller="User" asp-action="Login">
+                                        <i class="fas fa-sign-in-alt"></i> Login
+                                    </a>
+                                }
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @{
+                                var userEmail1 = Context.Request.Cookies["jwt"];
+                                if (!string.IsNullOrEmpty(userEmail1))
+                                {
+                                    <form asp-controller="User" asp-action="Logout" method="post" class="form-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-link text-white">
+                                            <i class="fas fa-sign-out-alt"></i> Logout
+                                        </button>
+                                    </form>
+                                }
+                            }
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- ... (remaining HTML code) ... -->
+            </div>
+            
+        </nav>
+
+        @{
+            var controllerName = ViewContext.RouteData.Values["Controller"]?.ToString();
+            var actionName = ViewContext.RouteData.Values["Action"]?.ToString();
+            var isExamController = string.Equals(controllerName, "Exam", StringComparison.OrdinalIgnoreCase);
+            var isLevelOneAction = string.Equals(actionName, "LevelOne", StringComparison.OrdinalIgnoreCase);
+            var isLevelTwoAction = string.Equals(actionName, "LevelTwo", StringComparison.OrdinalIgnoreCase);
+            var isLevelThreeAction = string.Equals(actionName, "LevelThree", StringComparison.OrdinalIgnoreCase);
+
+            var hideNavbarClass = (isExamController && (isLevelOneAction || isLevelTwoAction || isLevelThreeAction)) ? "hide-navbar" : "";
+        }
+
+        <body class="@hideNavbarClass">
+            <!-- Rest of your HTML content -->
+        </body>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
